@@ -22,7 +22,7 @@ async function findUbloxPort() {
 
 function parseGPRMC(line) {
     const parts = line.split(',');
-    if (parts[0].includes('GPRMC') && parts[2] === 'A') {
+    if (parts[0].includes('GPRMC') && parts[2] === 'V') {
         try {
             const hh = parseInt(parts[1].slice(0, 2));
             const mm = parseInt(parts[1].slice(2, 4));
@@ -73,7 +73,8 @@ async function start() {
         if (line.startsWith('$GPRMC') || line.startsWith('$GNRMC')) {
             const t = parseGPRMC(line);
             if (t) {
-                console.log(`🕒 GPS Time: ${t.year}-${t.month}-${t.day} ${t.hour}:${t.min}:${t.sec}`);
+                const time = `${t.year}-${t.month}-${t.day} ${t.hour}:${t.min}:${t.sec}`
+                console.log(`🕒 GPS Time: ${time}`);
                 // setWindowsTime(t);
             }
         }
@@ -83,7 +84,8 @@ async function start() {
         const data = port.read().toString()
         // if (data.startsWith('$GPRMC') || data.startsWith('$GNRMC')) { 
 
-            console.log('Data:', data)
+        // console.log('Data:', data)
+        // console.log('==============')
         // }
     })
 }
