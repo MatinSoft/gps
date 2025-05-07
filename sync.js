@@ -1,7 +1,7 @@
 const { SerialPort } = require('serialport');
 const { ReadlineParser } = require('@serialport/parser-readline');
-const { isTehranTimeDifferentFromLocal, parseGPRMC, setWindowsTime , convertUtcToTehranTime , isValidUtcDateString } = require("./lib/TimeFunctions")
-const { findUbloxPort , BAUD_RATE } = require("./lib/serialPortRead")
+const { isTehranTimeDifferentFromLocal, parseGPRMC, setWindowsTime, convertUtcToTehranTime, isValidUtcDateString } = require("./lib/TimeFunctions")
+const { findUbloxPort, BAUD_RATE } = require("./lib/serialPortRead")
 
 
 async function start() {
@@ -23,16 +23,16 @@ async function start() {
             const t = parseGPRMC(line);
             if (t) {
                 const time = `${t.year}-${t.month}-${t.day} ${t.hour}:${t.min}:${t.sec}`
-                if(isValidUtcDateString(time)) {
+                if (isValidUtcDateString(time)) {
 
                     console.log(`🕒 GPS Time: ${time}`);
                     const tehranTime = convertUtcToTehranTime(time);
-                    if(isTehranTimeDifferentFromLocal(time)){
-                        
+                    if (isTehranTimeDifferentFromLocal(time)) {
+
                         setWindowsTime(tehranTime);
                     }
                 }
-            
+
             }
         }
     });
@@ -47,4 +47,5 @@ async function start() {
     })
 }
 
-start();
+
+exports.monitorGpsTime = start;

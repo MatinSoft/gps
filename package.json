@@ -2,23 +2,14 @@
   "dependencies": {
     "serialport": "^13.0.0"
   },
-  "name": "sync_windows_time_gps",
+  "name": "sync-windows-time-gps",
   "version": "1.0.0",
-  "main": "dist/sync.cjs",
-  "module": "dist/sync.js", 
-  "exports": {
-    "require": "./dist/sync.cjs",
-    "import": "./dist/sync.js"
-  },
+  "main": "sync.js",
   "directories": {
     "lib": "lib"
   },
-  "devDependencies": {
-    "microbundle": "^0.15.1"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "microbundle --no-sourcemap sync.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
